@@ -1,4 +1,4 @@
-package u6pp;
+package u4a;
 
 class Main {
   public static void main(String[] args) {  

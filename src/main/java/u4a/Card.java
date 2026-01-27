@@ -1,4 +1,4 @@
-package u6pp;
+package u4a;
 
 /**
  * A class that represents a standard playing Card 
@@ -57,6 +57,19 @@ public class Card implements Comparable<Card>{
 	 */
 	public boolean equals (Card c) {
 		return this.toString().equals(c.toString());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Card) {
+			return this.equals((Card) o);
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
 	}
 	
 	/**

@@ -9,7 +9,7 @@ For this project, you will be writing three different classes: `Deck`, `Blackjac
 - All code commented: 2 points
 - No public methods/attributes besides the ones specified (additional private methods/attributes are encouraged): 2 point
 - All code is DRY (Don't repeat yourself): 3 points
-- Passes all test cases: 20 points
+- Passes all test cases: 20 points (60 test cases, so 1/3 of a point each) (if your thing shows 62 test cases, I will ignore 2 working ones, because they aren't real test cases.)
 Total: 30 points
 
 ### Extra Credit
@@ -27,7 +27,7 @@ In Unit 5, you figured out how to make a `Card`. A `Card` class has been provide
 1. `public Deck()`: Default constructor. Creates 52 unique `Card`s based on the potential values and suits
 2. `public int numLeft()`: Returns how many "undealt" cards are in `Deck`
 3. `public Card deal()`: Takes a card off the "top" of the `Deck` and returns it.
-4. `public void shuffle()`: Restores the `Deck` to "full" and randomizes the order of the `Card`s to be dealt
+4. `public void shuffle()`: Restores the `Deck` to "full" (52 cards) and randomizes the order of the `Card`s to be dealt
 
 You may include any other `private` methods and instance variables you think applicable. You should have nothing else that is `public` than what is listed above.
 
@@ -45,11 +45,11 @@ If either *Player* scores 21 points in the opening hand, the game is over becaus
 
 If neither *Player* has *Blackjack*, then the *User* gets to choose to *Hit* or *Stay*. If they choose to *Hit* they are dealt another `Card` from the top of the `Deck`. If the new `Card` makes their points go over 21, they *Bust* and the game ends in their defeat. If they have 21 or less, they are prompted again to *Hit* or *Stay*. This continues until either the *User* *Bust*s or *Stay*s.
 
-If the *User* *Stay*s, the *Dealer* now must *Hit* until their score is greater than or equal to 17, or they *Bust*. If they *Bust* the game is over and the *User* wins. Otherwise, if their score is 17 or higher, the `Card`s are flipped.
+If the *User* *Stay*s, the *Dealer* now must *Hit* until their score is greater than or equal to 17, or they *Bust*. If they *Bust* the game is over and the *User* wins. Otherwise, if their score is 19 or higher, the `Card`s are flipped.
 
 When the `Card`s are flipped, the *User* and the *Dealer*'s scores are compared. Whoever has the higher score wins. In the case of a tie, the game ends in a *Push*.
 
-When the game ends, be sure to print the result *Blackjack*, *Bust*, *Win*, *Lose*, or *Push*. Then, prompt the *User* to play again. If they select yes, **do not** shuffle the `Deck` and start over. If not, thank them for their time and end the program. Only shuffle the `Deck` if the `Deck` runs out of `Card`s during gameplay.
+When the game ends, be sure to print the result *Blackjack*, *Bust*, *Win*, *Lose*, or *Push*. Then, prompt the *User* to play again. If they select yes, **do not** shuffle the `Deck` and start over. If not, thank them for their time and end the program. Only shuffle the `Deck` if the `Deck` runs low on `Card`s during gameplay (less than 4 cards left).
 
 ### PART B Required Methods
 

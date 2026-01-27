@@ -1,4 +1,4 @@
-package u6pp;
+package u4a;
 
 /**
  * The Dice class represents an n-Sided dice. The default number of sides is 6

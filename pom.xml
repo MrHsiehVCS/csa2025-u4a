@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>csa</groupId>
-  <artifactId>u6pp</artifactId>
+  <artifactId>csa2025-u4a</artifactId>
   <version>1.0</version>
 
-  <name>u6pp</name>
-  <url>https://github.com/dhoffmanvillage/u6pp.git</url>
+  <name>csa2025-u4a</name>
+  <url>https://github.com/MrHsiehVCS/csa2025-u4a</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
