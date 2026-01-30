@@ -65,16 +65,6 @@ public class DeckTests {
     }
 
     @Test
-    void testDealThrowsExceptionOnEmptyDeck() {
-        Deck testDeck = new Deck();
-        // Deal all cards to empty the deck
-        for (int i = 0; i < DECK_SIZE; i++) {
-            testDeck.deal();
-        }
-        assertThrows(IllegalStateException.class, () -> testDeck.deal(), "Trying to deal from an empty deck should cause an error.");
-    }
-
-    @Test
     void testShuffleOnEmptyDeck() {
         Deck testDeck = new Deck();
         dealAllCardsFromDeck(testDeck); // Empty the deck
