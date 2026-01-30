@@ -76,9 +76,10 @@ public class DeckTests {
     @Test
     void testSetCardsUpdatesDeck() {
         Deck testDeck = new Deck();
-        ArrayList<Card> customCards = new ArrayList<>();
-        customCards.add(new Card("Hearts", "Ace"));
-        customCards.add(new Card("Spades", "King"));
+        Card[] customCards = {
+            new Card("Hearts", "Ace"),
+            new Card("Spades", "King")
+        };
         testDeck.setCards(customCards);
         assertEquals(2, testDeck.numLeft(), "Setting custom cards should update the deck size to match the list.");
         assertEquals(new Card("Hearts", "Ace"), testDeck.deal(), "The first card dealt after setting should be the first in the custom list.");
@@ -88,7 +89,8 @@ public class DeckTests {
     @Test
     void testSetCardsWithEmptyList() {
         Deck testDeck = new Deck();
-        testDeck.setCards(new ArrayList<>());
+        Card[] cards = {};
+        testDeck.setCards(cards);
         assertEquals(0, testDeck.numLeft(), "Setting an empty list should make the deck have 0 cards.");
         assertThrows(IllegalStateException.class, () -> testDeck.deal(), "Trying to deal from a deck set to empty should cause an error.");
     }

@@ -250,13 +250,13 @@ public class BlackjackTests {
     void testPlayUserBlackjack() throws Exception {
         testPlayScenario(
             "TestUser\nn\n", // input: name, no play again
-            Arrays.asList(
+            new Card[] {
                 new Card("Spades", "Jack"), // user1
                 new Card("Spades", "2"),    // dealer1
                 new Card("Clubs", "Ace"),  // user2
                 new Card("Spades", "5")    // dealer2
-            ),
-            Arrays.asList("Blackjack", "User Wins")
+            },
+            new String[] {"Blackjack", "User Wins"}
         );
     }
 
@@ -264,13 +264,13 @@ public class BlackjackTests {
     void testPlayDealerBlackjack() throws Exception {
         testPlayScenario(
             "TestUser\nn\n",
-            Arrays.asList(
+            new Card[] {
                 new Card("Hearts", "7"),   // user1
                 new Card("Clubs", "Ace"),  // dealer1
                 new Card("Diamonds", "8"), // user2
                 new Card("Spades", "Jack") // dealer2
-            ),
-            Arrays.asList("Blackjack", "User Loses")
+            },
+            new String[] {"Blackjack", "User Loses"}
         );
     }
 
@@ -278,13 +278,13 @@ public class BlackjackTests {
     void testPlayBothBlackjackPush() throws Exception {
         testPlayScenario(
             "TestUser\nn\n",
-            Arrays.asList(
+            new Card[] {
                 new Card("Clubs", "Ace"),  // user1
                 new Card("Diamonds", "Ace"), // dealer1
                 new Card("Spades", "Jack"), // user2
                 new Card("Hearts", "Jack")  // dealer2
-            ),
-            Arrays.asList("Blackjack", "User Pushes")
+            },
+            new String[] {"Blackjack", "User Pushes"}
         );
     }
 
@@ -292,14 +292,14 @@ public class BlackjackTests {
     void testPlayUserHitsAndWins() throws Exception {
         testPlayScenario(
             "TestUser\ns\nn\n", // stay, no play again
-            Arrays.asList(
+            new Card[] {
                 new Card("Hearts", "9"),   // user1
                 new Card("Clubs", "6"),    // dealer1
                 new Card("Diamonds", "Queen"), // user2
                 new Card("Spades", "9"),   // dealer2
                 new Card("Hearts", "2")    // dealer hit -> 15+2=17
-            ),
-            Arrays.asList("User Wins")
+            },
+            new String[] {"User Wins"}
         );
     }
 
@@ -307,77 +307,89 @@ public class BlackjackTests {
     void testPlayUserBusts() throws Exception {
         testPlayScenario(
             "TestUser\nh\nh\nn\n", // hit, hit, no play again
-            Arrays.asList(
+            new Card[] {
                 new Card("Clubs", "3"),    // user1
                 new Card("Hearts", "3"),   // dealer1
                 new Card("Diamonds", "2"), // user2
                 new Card("Spades", "5"),   // dealer2
                 new Card("Hearts", "10"),  // user hit1
                 new Card("Clubs", "Ace")   // user hit2 -> bust
-            ),
-            Arrays.asList("busted", "User Loses")
+            },
+            new String[] {"busted", "User Loses"}
         );
     }
 
     @Test
     void testPlayDealerBusts() throws Exception {
-        testPlayScenario(
-            "TestUser\ns\nn\n", // stay, no play again
-            Arrays.asList(
+        Card[] cards = {
                 new Card("Hearts", "10"),  // user1
                 new Card("Clubs", "6"),    // dealer1
                 new Card("Diamonds", "7"), // user2
                 new Card("Spades", "9"),   // dealer2
                 new Card("Hearts", "Ace")  // dealer hit -> 15+11=26 bust
-            ),
+        };
+        testPlayScenario(
+            "TestUser\ns\nn\n", // stay, no play again
+            cards,
             Arrays.asList("User Wins")
         );
     }
 
     @Test
     void testPlayUserLoses() throws Exception {
-        testPlayScenario(
-            "TestUser\ns\nn\n", // stay, no play again
-            Arrays.asList(
+        Card[] cards = {
                 new Card("Hearts", "9"),   // user1
                 new Card("Clubs", "10"),   // dealer1
                 new Card("Diamonds", "Queen"), // user2
                 new Card("Spades", "10")   // dealer2 -> dealer 20, user 19
-            ),
+        };
+        testPlayScenario(
+            "TestUser\ns\nn\n", // stay, no play again
+            cards,
             Arrays.asList("User Loses")
         );
     }
 
     @Test
     void testPlayPush() throws Exception {
-        testPlayScenario(
-            "TestUser\ns\nn\n", // stay, no play again
-            Arrays.asList(
+            Card[] cards = {
                 new Card("Hearts", "10"),  // user1
                 new Card("Clubs", "10"),   // dealer1
                 new Card("Diamonds", "6"), // user2
                 new Card("Spades", "6"),   // dealer2
                 new Card("Hearts", "2")    // dealer hit -> 16+2=18
-            ),
+            };
+        testPlayScenario(
+            "TestUser\ns\nn\n", // stay, no play again
+            cards,
             Arrays.asList("User Loses")
         );
     }
 
     @Test
     void testPlayInvalidInput() throws Exception {
-        testPlayScenario(
-            "TestUser\ninvalid\ny\ns\nn\n", // invalid play again, then yes, then stay, then no
-            Arrays.asList(
+        Card[] cards = {
                 new Card("Spades", "Jack"),
                 new Card("Spades", "2"),
                 new Card("Clubs", "Ace"),
                 new Card("Spades", "5")
-            ),
+            };
+        testPlayScenario(
+            "TestUser\ninvalid\ny\ns\nn\n", // invalid play again, then yes, then stay, then no
+            cards,
             Arrays.asList("Invalid input", "Blackjack", "User Wins")
         );
     }
 
-    private void testPlayScenario(String input, List<Card> deckCards, List<String> expectedOutputs) throws Exception {
+    private void testPlayScenario(String input, Card[] deckCards, String[] expectedOutputs) throws Exception {
+        testPlayScenario(
+            input,
+            deckCards,
+            Arrays.asList(expectedOutputs)
+        );
+    }
+
+    private void testPlayScenario(String input, Card[] deckCards, List<String> expectedOutputs) throws Exception {
         // Save original streams
         PrintStream originalOut = System.out;
 
